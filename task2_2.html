@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/scripts.js"></script>
+    <title>Ознайомча практика</title>
+</head>
+
+<body>
+    <div class="container">
+        <section class="header">
+            <header>
+                <h1>Ознайомча практика 2024</h1>
+            </header>
+        </section>
+        <section class="main">
+            <main>
+                <div class="navbar">
+                    <a class="about" href="index.html">Головна</a>
+                    <div class="dropdown">
+                        <a style="cursor: default;">Завдання 1</a>
+                        <div class="dropdown-content">
+                            <a href="task1_1.html">Завдання 1.1</a>
+                            <a href="task1_2.html">Завдання 1.2</a>
+                            <a href="task1_3.html">Завдання 1.3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a style="cursor: default;">Завдання 2</a>
+                        <div class="dropdown-content">
+                            <a href="task2_1.html">Теорія</a>
+                            <a href="task2_2.html">Лістинг коду</a>
+                            <a href="task2_3.html">Тестування</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="task">
+                    <p class="name">Завдання 2</p>
+                    <p class="text-task">Ознайомитися з одним із чисельних методів та виконати його реалізацію мовою
+                        програмування високого рівня (за винятком Basic, Pascal, Fortran), засобами програмування
+                        Scilab та перевірити правильність отриманих програмних рішень за допомогою інших засобів
+                        Scilab.
+                    </p>
+                    <p class="variant">Варіант 9<br>Метод дихотомії<br>Нелінійне рівняння:<br>\[2x^3 + 9x^2 - 10 = 0\]
+                    </p>
+                </div>
+                <div class="info">
+                    <h4>Код написаний на C#</h4>
+                    <div class="area">
+                        <div class="filename">
+                            <p>Program.cs</p>
+                        </div>
+                        <div class="codearea">
+                            <pre><code class="language-c#">
+static double Function(double x)
+{
+    return 2 * x * x * x + 9 * x * x - 10;
+}
+
+static double Dichotomy(double a, double b, double tol)
+{
+    double c;
+
+    while ((b - a) / 2.0 > tol)
+    {
+        c = (a + b) / 2.0;
+        if (Function(c) == 0.0)
+        {
+            return c;
+        }
+        else if (Function(a) * Function(c) < 0)
+        {
+            b = c;
+        }
+        else
+        {
+            a = c;
+        }
+    }
+
+    return (a + b) / 2.0;
+}
+
+double a = double.Parse(Console.ReadLine());
+double b = double.Parse(Console.ReadLine());
+double tol = 1e-6;
+double root = Dichotomy(a, b, tol);
+
+Console.WriteLine($"Корiнь рiвняння: {root:F7}");
+                    </code></pre>
+                        </div>
+                    </div>
+                    <h4>Код написаний в Scilab</h4>
+                    <div class="area">
+                        <div class="filename">
+                            <p>2_2.sce</p>
+                        </div>
+                        <div class="codearea">
+                            <pre><code class="language-scilab">
+function y = f(x)
+    y = 2*x^3 + 9*x^2 - 10;
+endfunction
+
+function root = dichotomy(a, b, tol)
+    if f(a) * f(b) >= 0 then
+        error("Невірний початковий інтервал. Функція повинна мати різні знаки на кінцях інтервалу.");
+    end
+
+    while (b - a) / 2 > tol do
+        c = (a + b) / 2;
+        fc = f(c);
+
+        if fc == 0 then
+            root = c;
+            return;
+        elseif f(a) * fc < 0 then
+            b = c;
+        else
+            a = c;
+        end
+    end
+
+    root = (a + b) / 2;
+endfunction
+
+a = input("Введіть початок інтервалу (a): ");
+b = input("Введіть кінець інтервалу (b): ");
+tol = 1e-6;
+
+if a >= b then
+    error("Початок інтервалу повинен бути меншим за кінець інтервалу.");
+end
+
+root = dichotomy(a, b, tol);
+
+disp("Корінь рівняння: " + string(root));
+                    </code></pre>
+                        </div>
+                    </div>
+            </main>
+        </section>
+        <section class="footer">
+            <footer>
+                <a>
+                    <img src="./media/khai.png">
+                </a>
+                <a>
+                    <img src="./media/6fac.png">
+                </a>
+            </footer>
+        </section>
+    </div>
+</body>
+
+</html>
